@@ -2,9 +2,7 @@
 // Created by RueianOneecom on 2014/6/1.
 // Copyright (c) 2014 ___FULLUSERNAME___. All rights reserved.
 //
-#include <iostream>
-#include <string>
-#include <cmath>
+
 #include "Memory.h"
 
 #define INSTRUCTION_LENGTH 32

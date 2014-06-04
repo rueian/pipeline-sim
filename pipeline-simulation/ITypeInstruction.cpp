@@ -3,7 +3,6 @@
 // Copyright (c) 2014 ___FULLUSERNAME___. All rights reserved.
 //
 
-#include <iostream>
 #include "ITypeInstruction.h"
 
 ITypeInstruction::ITypeInstruction(string machineCode)

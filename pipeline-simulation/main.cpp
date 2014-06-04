@@ -6,7 +6,6 @@
 //  Copyright (c) 2014 RueianOneecom. All rights reserved.
 //
 
-#include <iostream>
 #include "CPU.h"
 
 using namespace std;
