@@ -3,14 +3,13 @@
 // Copyright (c) 2014 ___FULLUSERNAME___. All rights reserved.
 //
 
-#include "iostream"
 #include "SubInstruction.h"
 
 SubInstruction::SubInstruction(string machineCode)
 : RTypeInstruction(machineCode) {
 }
 
-int SubInstruction::ALUResoult(int data1, int data2) {
+int SubInstruction::ALUResult(int data1, int data2) {
     return data1 - data2;
 }
 

@@ -3,7 +3,6 @@
 // Copyright (c) 2014 ___FULLUSERNAME___. All rights reserved.
 //
 #include <vector>
-#include <string>
 #include "Memory.h"
 #include "Instruction.h"
 #include "Registers.h"

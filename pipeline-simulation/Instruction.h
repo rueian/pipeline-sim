@@ -10,7 +10,6 @@ __attribute__((constructor)) void register##class() { \
     }); \
 }
 
-
 #include <string>
 #include <map>
 #include "Memory.h"

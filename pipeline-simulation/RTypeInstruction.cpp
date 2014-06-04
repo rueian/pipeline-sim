@@ -37,7 +37,7 @@ void RTypeInstruction::IDStage() {
 void RTypeInstruction::EXStage() {
     int readData1 = atoi(_regs->plReg["ID/EX"]["ReadData1"].c_str());
     int readData2 = atoi(_regs->plReg["ID/EX"]["ReadData2"].c_str());
-    _regs->plReg["EX/MEM"]["ALUout"] = to_string(ALUResoult(readData1, readData2));
+    _regs->plReg["EX/MEM"]["ALUout"] = to_string(ALUResult(readData1, readData2));
     _regs->plReg["EX/MEM"]["WriteData"] = "0";
     _regs->plReg["EX/MEM"]["Rd"] = _regs->plReg["ID/EX"]["Rd"];
     _regs->plReg["EX/MEM"]["Rt"] = "";

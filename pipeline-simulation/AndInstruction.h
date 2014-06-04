@@ -15,7 +15,7 @@ public:
 
 protected:
 
-    virtual int ALUResoult(int data1, int data2);
+    virtual int ALUResult(int data1, int data2);
 };
 
 

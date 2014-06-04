@@ -27,7 +27,7 @@ protected:
     virtual void EXStage();
     virtual void MEMStage();
     virtual void WBStage();
-    virtual int ALUResoult(int, int) = 0;
+    virtual int ALUResult(int, int) = 0;
 };
 
 
