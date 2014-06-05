@@ -23,30 +23,36 @@ RTypeInstruction::~RTypeInstruction() {
 }
 
 void RTypeInstruction::IDStage() {
-    _regs->plReg["ID/EX"]["Rs"] = to_string(_rs);
-    _regs->plReg["ID/EX"]["Rt"] = to_string(_rt);
-    _regs->plReg["ID/EX"]["Rd"] = to_string(_rd);
-    _regs->plReg["ID/EX"]["sign_ext"] = "0";
-    _regs->plReg["ID/EX"]["Control Signals"] = _controlSginal;
-
-    _regs->plReg["ID/EX"]["ReadData1"] = to_string((int)_regs->reg[_rs]);
-    _regs->plReg["ID/EX"]["ReadData2"] = to_string((int)_regs->reg[_rt]);
+    _regs->plReg["ID/EX"] = {
+            {"ReadData1", to_string(_regs->reg[_rs])},
+            {"ReadData2", to_string(_regs->reg[_rt])},
+            {"sign_ext", "0"},
+            {"Rs", to_string(_rs)},
+            {"Rt", to_string(_rt)},
+            {"Rd", to_string(_rd)},
+            {"Control Signals", _controlSginal}
+    };
 }
 
 void RTypeInstruction::EXStage() {
     int readData1 = stoi(_regs->plReg["ID/EX"]["ReadData1"]);
     int readData2 = stoi(_regs->plReg["ID/EX"]["ReadData2"]);
-    _regs->plReg["EX/MEM"]["ALUout"] = to_string(ALUResult(readData1, readData2));
-    _regs->plReg["EX/MEM"]["WriteData"] = "0";
-    _regs->plReg["EX/MEM"]["Rd"] = _regs->plReg["ID/EX"]["Rd"];
-    _regs->plReg["EX/MEM"]["Rt"] = "";
-    _regs->plReg["EX/MEM"]["Control Signals"] = _controlSginal.substr(4, 5);
+
+    _regs->plReg["EX/MEM"] = {
+            {"ALUout", to_string(ALUResult(readData1, readData2))},
+            {"WriteData", "0"},
+            {"Rt", ""},
+            {"Rd", _regs->plReg["ID/EX"]["Rd"]},
+            {"Control Signals", _controlSginal.substr(4, 5)}
+    };
 }
 
 void RTypeInstruction::MEMStage() {
-    _regs->plReg["MEM/WB"]["ReadData"] = "0";
-    _regs->plReg["MEM/WB"]["ALUout"] = _regs->plReg["EX/MEM"]["ALUout"];
-    _regs->plReg["MEM/WB"]["Control Signals"] = _controlSginal.substr(7, 2);
+    _regs->plReg["MEM/WB"] = {
+            {"ReadData", "0"},
+            {"ALUout", _regs->plReg["EX/MEM"]["ALUout"]},
+            {"Control Signals", _controlSginal.substr(7, 2)}
+    };
 }
 
 void RTypeInstruction::WBStage() {
