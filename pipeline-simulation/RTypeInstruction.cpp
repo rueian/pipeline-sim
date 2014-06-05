@@ -24,8 +24,8 @@ RTypeInstruction::~RTypeInstruction() {
 
 void RTypeInstruction::IDStage() {
     _regs->plReg["ID/EX"] = {
-            {"ReadData1", to_string(_regs->reg[_rs])},
-            {"ReadData2", to_string(_regs->reg[_rt])},
+            {"ReadData1", to_string((int)_regs->reg[_rs])},
+            {"ReadData2", to_string((int)_regs->reg[_rt])},
             {"sign_ext", "0"},
             {"Rs", to_string(_rs)},
             {"Rt", to_string(_rt)},
