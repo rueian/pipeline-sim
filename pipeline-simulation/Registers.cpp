@@ -32,6 +32,7 @@ Registers::Registers(vector<int> regs) {
             {"MEM/WB", {
                     {"ReadData", "0"},
                     {"ALUout", "0"},
+                    {"Rd", ""},
                     {"Control Signals", "00"}
             }}
     };

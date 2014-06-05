@@ -50,6 +50,7 @@ void ITypeInstruction::MEMStage() {
     _regs->plReg["MEM/WB"] = {
             {"ReadData", to_string(readDataMemory())},
             {"ALUout", _regs->plReg["EX/MEM"]["ALUout"]},
+            {"Rd", ""},
             {"Control Signals", _controlSginal.substr(7, 2)}
     };
 }

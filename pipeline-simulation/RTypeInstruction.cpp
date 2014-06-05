@@ -51,6 +51,7 @@ void RTypeInstruction::MEMStage() {
     _regs->plReg["MEM/WB"] = {
             {"ReadData", "0"},
             {"ALUout", _regs->plReg["EX/MEM"]["ALUout"]},
+            {"Rd", _regs->plReg["EX/MEM"]["Rd"]},
             {"Control Signals", _controlSginal.substr(7, 2)}
     };
 }
