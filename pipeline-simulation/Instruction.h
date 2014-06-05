@@ -38,11 +38,12 @@ public:
 
 protected:
     void IFStage();
+    virtual void formatInstruction() = 0;
     virtual void IDStage() = 0;
     virtual void EXStage() = 0;
     virtual void MEMStage() = 0;
     virtual void WBStage() = 0;
-    virtual void formatInstruction() = 0;
+    virtual int ALUResult(int, int) = 0;
 
     Memory *_memory;
     Registers *_regs;

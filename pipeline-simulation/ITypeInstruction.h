@@ -22,7 +22,11 @@ protected:
     int _immediate;
 
     void formatInstruction();
-
+    virtual void IDStage();
+    virtual void EXStage();
+    virtual void MEMStage();
+    virtual void WBStage();
+    virtual int readDataMemory() = 0;
 };
 
 

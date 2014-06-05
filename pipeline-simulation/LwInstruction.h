@@ -14,13 +14,9 @@ public:
     LwInstruction(string);
 
 protected:
-    virtual void IDStage();
-
-    virtual void EXStage();
-
-    virtual void MEMStage();
-
     virtual void WBStage();
+    virtual int ALUResult(int data1, int data2);
+    virtual int readDataMemory();
 };
 
 
