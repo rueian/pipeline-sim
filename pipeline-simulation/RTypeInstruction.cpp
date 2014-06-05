@@ -3,7 +3,6 @@
 // Copyright (c) 2014 ___FULLUSERNAME___. All rights reserved.
 //
 
-#include <iostream>
 #include "RTypeInstruction.h"
 
 RTypeInstruction::RTypeInstruction(string machineCode)
@@ -35,8 +34,8 @@ void RTypeInstruction::IDStage() {
 }
 
 void RTypeInstruction::EXStage() {
-    int readData1 = atoi(_regs->plReg["ID/EX"]["ReadData1"].c_str());
-    int readData2 = atoi(_regs->plReg["ID/EX"]["ReadData2"].c_str());
+    int readData1 = stoi(_regs->plReg["ID/EX"]["ReadData1"]);
+    int readData2 = stoi(_regs->plReg["ID/EX"]["ReadData2"]);
     _regs->plReg["EX/MEM"]["ALUout"] = to_string(ALUResult(readData1, readData2));
     _regs->plReg["EX/MEM"]["WriteData"] = "0";
     _regs->plReg["EX/MEM"]["Rd"] = _regs->plReg["ID/EX"]["Rd"];
@@ -51,5 +50,5 @@ void RTypeInstruction::MEMStage() {
 }
 
 void RTypeInstruction::WBStage() {
-    _regs->reg[_rd] = atoi(_regs->plReg["MEM/WB"]["ALUout"].c_str());
+    _regs->reg[_rd] = stoi(_regs->plReg["MEM/WB"]["ALUout"]);
 }

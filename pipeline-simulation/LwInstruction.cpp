@@ -3,7 +3,6 @@
 // Copyright (c) 2014 ___FULLUSERNAME___. All rights reserved.
 //
 
-#include <iostream>
 #include "LwInstruction.h"
 
 LwInstruction::LwInstruction(string machineCode)
@@ -22,8 +21,8 @@ void LwInstruction::IDStage() {
 }
 
 void LwInstruction::EXStage() {
-    int readData1 = atoi(_regs->plReg["ID/EX"]["ReadData1"].c_str());
-    int sign_ext = atoi(_regs->plReg["ID/EX"]["sign_ext"].c_str());
+    int readData1 = stoi(_regs->plReg["ID/EX"]["ReadData1"]);
+    int sign_ext = stoi(_regs->plReg["ID/EX"]["sign_ext"]);
     _regs->plReg["EX/MEM"]["ALUout"] = to_string(readData1 + sign_ext);
     _regs->plReg["EX/MEM"]["Rt"] = _regs->plReg["ID/EX"]["Rt"];
     _regs->plReg["EX/MEM"]["Rd"] = "";
@@ -37,7 +36,7 @@ void LwInstruction::MEMStage() {
 }
 
 void LwInstruction::WBStage() {
-    _regs->reg[_rt] = atoi(_regs->plReg["MEM/WB"]["ReadData"].c_str());
+    _regs->reg[_rt] = stoi(_regs->plReg["MEM/WB"]["ReadData"]);
 }
 
 REGISTER_INSTRUCTION(100011, LwInstruction)
