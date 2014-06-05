@@ -35,11 +35,8 @@ void RTypeInstruction::IDStage() {
 }
 
 void RTypeInstruction::EXStage() {
-    int readData1 = stoi(_regs->plReg["ID/EX"]["ReadData1"]);
-    int readData2 = stoi(_regs->plReg["ID/EX"]["ReadData2"]);
-
     _regs->plReg["EX/MEM"] = {
-            {"ALUout", to_string(ALUResult(readData1, readData2))},
+            {"ALUout", to_string(ALUResult(getALUSrc("Rs"), getALUSrc("Rt")))},
             {"WriteData", "0"},
             {"Rt", ""},
             {"Rd", _regs->plReg["ID/EX"]["Rd"]},
@@ -58,4 +55,17 @@ void RTypeInstruction::MEMStage() {
 
 void RTypeInstruction::WBStage() {
     _regs->reg[_rd] = stoi(_regs->plReg["MEM/WB"]["ALUout"]);
+}
+
+int RTypeInstruction::getALUSrc(string src) {
+    if (hazardHappened("EX/MEM", src))
+        return stoi(_regs->plReg["EX/MEM"]["ALUout"]);
+    else if (hazardHappened("MEM/WB", src))
+        return stoi(_regs->plReg["MEM/WB"]["ALUout"]);
+    string destination = (src == "Rs" ? "ReadData1" : "ReadData2");
+    return stoi(_regs->plReg["ID/EX"][destination]);
+}
+
+bool RTypeInstruction::hazardHappened(string reg, string src) {
+    return _regs->plReg[reg]["Rd"] != "0" && _regs->plReg[reg]["Rd"] == _regs->plReg["ID/EX"][src];
 }

@@ -27,6 +27,10 @@ protected:
     virtual void EXStage();
     virtual void MEMStage();
     virtual void WBStage();
+
+private:
+    int getALUSrc(string);
+    bool hazardHappened(string, string);
 };
 
 
