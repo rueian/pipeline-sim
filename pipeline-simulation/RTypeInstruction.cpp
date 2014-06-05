@@ -23,7 +23,7 @@ RTypeInstruction::~RTypeInstruction() {
 }
 
 void RTypeInstruction::IDStage() {
-    _regs->plReg["ID/EX"] = {
+    _regs->plRegNew["ID/EX"] = {
             {"ReadData1", to_string((int)_regs->reg[_rs])},
             {"ReadData2", to_string((int)_regs->reg[_rt])},
             {"sign_ext", "0"},
@@ -35,7 +35,7 @@ void RTypeInstruction::IDStage() {
 }
 
 void RTypeInstruction::EXStage() {
-    _regs->plReg["EX/MEM"] = {
+    _regs->plRegNew["EX/MEM"] = {
             {"ALUout", to_string(ALUResult(getALUSrc("Rs"), getALUSrc("Rt")))},
             {"WriteData", "0"},
             {"Rt", ""},
@@ -45,7 +45,7 @@ void RTypeInstruction::EXStage() {
 }
 
 void RTypeInstruction::MEMStage() {
-    _regs->plReg["MEM/WB"] = {
+    _regs->plRegNew["MEM/WB"] = {
             {"ReadData", "0"},
             {"ALUout", _regs->plReg["EX/MEM"]["ALUout"]},
             {"Rd", _regs->plReg["EX/MEM"]["Rd"]},

@@ -7,11 +7,22 @@
 
 Registers::Registers(vector<int> regs) {
     reg = regs;
+    plReg = Registers::newPipelineRegs();
+    plRegNew = Registers::newPipelineRegs();
 
-    plReg = {
+}
+
+void Registers::updatePipeLineRegs() {
+    plReg = plRegNew;
+    plRegNew = Registers::newPipelineRegs();
+    plRegNew["IF/ID"]["PC"] = plReg["IF/ID"]["PC"];
+}
+
+map<string, map<string, string> > Registers::newPipelineRegs() {
+    return {
             {"IF/ID", {
                     {"PC", ""},
-                    {"Instruction", ""}
+                    {"Instruction", "00000000000000000000000000000000"}
             }},
             {"ID/EX", {
                     {"ReadData1", "0"},
@@ -36,5 +47,4 @@ Registers::Registers(vector<int> regs) {
                     {"Control Signals", "00"}
             }}
     };
-
 }

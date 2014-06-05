@@ -71,8 +71,8 @@ int Instruction::bitStringConvert(string bitString) {
 
 void Instruction::IFStage() {
     formatInstruction();
-    _regs->plReg["IF/ID"]["Instruction"] = _machineCode;
-    _regs->plReg["IF/ID"]["PC"] = to_string(*_programCounter*4);
+    _regs->plRegNew["IF/ID"]["Instruction"] = _machineCode;
+    _regs->plRegNew["IF/ID"]["PC"] = to_string(*_programCounter*4);
 }
 
 Instruction::Instruction(string machineCode) {

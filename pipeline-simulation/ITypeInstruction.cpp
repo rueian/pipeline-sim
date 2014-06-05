@@ -21,7 +21,7 @@ ITypeInstruction::~ITypeInstruction() {
 }
 
 void ITypeInstruction::IDStage() {
-    _regs->plReg["ID/EX"] = {
+    _regs->plRegNew["ID/EX"] = {
             {"ReadData1", to_string((int)_regs->reg[_rs])},
             {"ReadData2", to_string((int)_regs->reg[_rt])},
             {"sign_ext", to_string(_immediate)},
@@ -36,7 +36,7 @@ void ITypeInstruction::EXStage() {
     int readData1 = stoi(_regs->plReg["ID/EX"]["ReadData1"]);
     int sign_ext = stoi(_regs->plReg["ID/EX"]["sign_ext"]);
 
-    _regs->plReg["EX/MEM"] = {
+    _regs->plRegNew["EX/MEM"] = {
             {"ReadData2", _regs->plReg["ID/EX"]["ReadData2"]},
             {"ALUout", to_string(ALUResult(readData1, sign_ext))},
             {"WriteData", _controlSginal.substr(6, 1)},
@@ -47,7 +47,7 @@ void ITypeInstruction::EXStage() {
 }
 
 void ITypeInstruction::MEMStage() {
-    _regs->plReg["MEM/WB"] = {
+    _regs->plRegNew["MEM/WB"] = {
             {"ReadData", to_string(readDataMemory())},
             {"ALUout", _regs->plReg["EX/MEM"]["ALUout"]},
             {"Rd", ""},

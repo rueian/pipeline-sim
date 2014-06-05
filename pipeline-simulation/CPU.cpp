@@ -24,6 +24,7 @@ void CPU::execute() {
         for(auto& instruction : _pipeline) {
             instruction->goNextStage();
         }
+        _registers.updatePipeLineRegs();
         printStatus();
         _cycleCounter++;
     }

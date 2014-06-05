@@ -15,10 +15,14 @@ using namespace std;
 class Registers {
 public:
     Registers(vector<int>);
+    void updatePipeLineRegs();
 
     vector<int> reg;
-    map<string, map<string, string>> plReg;
+    map< string, map< string, string > > plReg;
+    map< string, map< string, string > > plRegNew;
 
+private:
+    static map< string, map< string, string > > newPipelineRegs();
 };
 
 
