@@ -20,6 +20,8 @@ void CPU::execute() {
     while ( ! allInstructionDone()) {
         if (instructionFetchable())
             instructionFetch();
+        _programCounter++;
+        _registers.plRegNew["IF/ID"]["PC"] = to_string(_programCounter*4);
 
         for(auto& instruction : _pipeline) {
             instruction->goNextStage();
@@ -87,5 +89,4 @@ bool CPU::allInstructionDone() {
 void CPU::instructionFetch() {
     Instruction* instruction = Instruction::instructionDecode(_memory.getInstruction(_programCounter), &_memory, &_registers, &_programCounter);
     _pipeline.push_back(instruction);
-    _programCounter++;
 }
