@@ -37,6 +37,7 @@ void ITypeInstruction::EXStage() {
     int sign_ext = stoi(_regs->plReg["ID/EX"]["sign_ext"]);
 
     _regs->plReg["EX/MEM"] = {
+            {"ReadData2", _regs->plReg["ID/EX"]["ReadData2"]},
             {"ALUout", to_string(ALUResult(readData1, sign_ext))},
             {"WriteData", _controlSginal.substr(6, 1)},
             {"Rt", _regs->plReg["ID/EX"]["Rt"]},
