@@ -16,13 +16,8 @@ public:
 
 protected:
     virtual void WBStage();
-    virtual void EXStage() override;
-    virtual void MEMStage() override;
     virtual int ALUResult(int data1, int data2);
     virtual int readDataMemory();
-
-private:
-    bool _stallFlag;
 
 };
 
