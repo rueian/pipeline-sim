@@ -3,7 +3,6 @@
 // Copyright (c) 2014 ___FULLUSERNAME___. All rights reserved.
 //
 
-#include <iostream>
 #include "RTypeInstruction.h"
 
 RTypeInstruction::RTypeInstruction(string machineCode)
@@ -81,6 +80,4 @@ void RTypeInstruction::IFStage() {
     Instruction::IFStage();
     _regs->plRegNew["IF/ID"]["Rs"] = to_string(_rs);
     _regs->plRegNew["IF/ID"]["Rt"] = to_string(_rt);
-    cout << "RType IFStage Rs: " << _regs->plRegNew["IF/ID"]["Rs"] <<endl;
-    cout << "RType IFStage Rt: " << _regs->plRegNew["IF/ID"]["Rt"] <<endl;
 }

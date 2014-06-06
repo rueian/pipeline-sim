@@ -96,7 +96,6 @@ void CPU::instructionFetch() {
 }
 
 void CPU::stallPipeline() {
-    cout << "STALL!!!!!!!"<< endl;
     _pipeline.pop_back();
     _registers.plRegNew["IF/ID"] = _registers.plReg["IF/ID"];
     _programCounter --;

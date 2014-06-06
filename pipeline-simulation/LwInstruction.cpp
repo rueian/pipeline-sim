@@ -3,7 +3,6 @@
 // Copyright (c) 2014 ___FULLUSERNAME___. All rights reserved.
 //
 
-#include <iostream>
 #include "LwInstruction.h"
 
 LwInstruction::LwInstruction(string machineCode)
@@ -18,9 +17,6 @@ void LwInstruction::WBStage() {
 
 void LwInstruction::EXStage() {
     ITypeInstruction::EXStage();
-    cout << "ID/EX Rt: " << _regs->plReg["ID/EX"]["Rt"] << endl;
-    cout << "IF/ID Rt: " << _regs->plReg["IF/ID"]["Rt"] << endl;
-    cout << "IF/ID Rs: " << _regs->plReg["IF/ID"]["Rs"] << endl;
     _stallFlag = (_regs->plReg["ID/EX"]["Rt"] == _regs->plReg["IF/ID"]["Rt"] ||
                   _regs->plReg["ID/EX"]["Rt"] == _regs->plReg["IF/ID"]["Rs"]);
 }
