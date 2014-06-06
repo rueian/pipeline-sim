@@ -26,10 +26,8 @@ void CPU::execute() {
 
         for(int i = 0; i < _pipeline.size(); i++) {
             _pipeline[i]->goNextStage();
-            if (_pipeline[i]->needStallPipeline()) {
-                _pipeline[i+1]->becomeNop();
-                stallPipeline();
-            }
+            if (_pipeline[i]->needStallPipeline())
+                stallPipeline(i);
         }
 
         _registers.updatePipeLineRegs();
@@ -101,7 +99,8 @@ void CPU::instructionFetch() {
     instructionFetch(_programCounter);
 }
 
-void CPU::stallPipeline() {
+void CPU::stallPipeline(int instructionIndex) {
+    _pipeline[instructionIndex+1]->becomeNop();
     _pipeline.pop_back();
     _registers.plRegNew["IF/ID"] = _registers.plReg["IF/ID"];
     _programCounter --;

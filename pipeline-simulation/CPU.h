@@ -30,7 +30,7 @@ private:
     bool allInstructionDone();
     void instructionFetch();
     void instructionFetch(int);
-    void stallPipeline();
+    void stallPipeline(int);
 };
 
 
