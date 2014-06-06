@@ -22,4 +22,9 @@ int LwInstruction::readDataMemory() {
     return _memory->getDataMemory(_regs->plReg["EX/MEM"]["ALUout"]);
 }
 
+bool LwInstruction::needStallPipeline() {
+    return _regs->plReg["ID/EX"]["Rt"] == _regs->plReg["IF/ID"]["Rt"] ||
+           _regs->plReg["ID/EX"]["Rt"] == _regs->plReg["IF/ID"]["Rs"];
+}
+
 REGISTER_INSTRUCTION(100011, LwInstruction)

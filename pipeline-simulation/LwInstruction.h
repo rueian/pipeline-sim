@@ -17,6 +17,9 @@ protected:
     virtual void WBStage();
     virtual int ALUResult(int data1, int data2);
     virtual int readDataMemory();
+
+public:
+    virtual bool needStallPipeline() override;
 };
 
 
