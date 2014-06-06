@@ -18,7 +18,6 @@ CPU::~CPU() {
 
 void CPU::execute() {
     while ( ! allInstructionDone()) {
-        cout << "Fetch new ? " << instructionFetchable() << endl;
         if (instructionFetchable())
             instructionFetch();
         _programCounter++;
@@ -84,8 +83,7 @@ void CPU::printStatus() {
 }
 
 bool CPU::instructionFetchable() {
-    bool fetchable = (!_pipeline.empty() ? _pipeline.back()->ableToFetchNext() : true);
-    return _programCounter < _memory.getInstructionCount() && fetchable;
+    return _programCounter < _memory.getInstructionCount();
 }
 
 bool CPU::allInstructionDone() {

@@ -87,8 +87,3 @@ bool Instruction::isDone() {
 bool Instruction::needStallPipeline() {
     return false;
 }
-
-bool Instruction::ableToFetchNext() {
-    cout << "last stage: " << _currentStage << endl;
-    return _currentStage != "BEGIN";
-}
