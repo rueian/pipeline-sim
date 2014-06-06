@@ -139,3 +139,7 @@ void Instruction::formatInstruction() {
     _target    = Instruction::bitStringConvert(_machineCode.substr(6, 26));
     _funct     = _machineCode.substr(26, 6);
 }
+
+bool Instruction::needTakeBranch() {
+    return false;
+}

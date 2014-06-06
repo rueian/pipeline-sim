@@ -36,28 +36,6 @@ void CPU::execute() {
     }
 }
 
-// Instruction* CPU::instructionDecode(string machineCode) {
-//    string opcode = machineCode.substr(0, 6);
-//
-//    if (opcode == "100011") { // lw
-//        cout << "lw" << endl;
-//    } else if (opcode == "001000") { // sw
-//        cout << "sw" << endl;
-//    } else if (opcode == "000100") { // beq
-//        cout << "beq" << endl;
-//    } else if (opcode == "000000") { // R
-//        string funct = machineCode.substr(26, 6);
-//        if (funct == "100000") {
-//            cout << "add" << endl;
-//        } else if (funct == "100010") {
-//            cout << "sub" << endl;
-//        } else if (funct == "100100") {
-//            cout << "and" << endl;
-//        } else if (funct == "100101") {
-//            cout << "or" << endl;
-//        }
-//    }
-// }
 void CPU::printStatus() {
     cout << "CC " << _cycleCounter << ":" << endl << endl;
     cout << "Registers:" << endl;

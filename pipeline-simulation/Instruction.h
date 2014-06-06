@@ -29,6 +29,7 @@ public:
     void goNextStage();
     bool isDone();
     virtual bool needStallPipeline();
+    virtual bool needTakeBranch();
     Instruction* becomeNop();
     Instruction* setMemory(Memory*);
     Instruction* setRegisters(Registers*);
