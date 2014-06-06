@@ -67,7 +67,7 @@ void CPU::printStatus() {
     }
     cout << endl;
     cout << "Data Memory:" << endl;
-    for (auto v : {"0","2","4","8","16"})
+    for (auto v : {"0","4","8","12","16"})
         cout << setfill('0') << setw(2) << v << ":" << setfill(' ') << setw(6) << right << _memory.getDataMemory(v) << endl;
     cout << endl;
     map<string, vector<string>> pipelineRegistersIndex = {{"IF/ID", {"PC", "Instruction"}},{"ID/EX", {"ReadData1","ReadData2","sign_ext","Rs","Rt","Rd","Control Signals"}},{"EX/MEM", {"ALUout","WriteData","Rt","Rd","Control Signals"}},{"MEM/WB", {"ReadData","ALUout","Control Signals"}}};
