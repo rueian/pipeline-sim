@@ -12,14 +12,18 @@
 class LwInstruction : public ITypeInstruction {
 public:
     LwInstruction(string);
+    virtual bool needStallPipeline() override;
 
 protected:
     virtual void WBStage();
+    virtual void EXStage() override;
+    virtual void MEMStage() override;
     virtual int ALUResult(int data1, int data2);
     virtual int readDataMemory();
 
-public:
-    virtual bool needStallPipeline() override;
+private:
+    bool _stallFlag;
+
 };
 
 

@@ -3,6 +3,7 @@
 // Copyright (c) 2014 ___FULLUSERNAME___. All rights reserved.
 //
 
+#include <iostream>
 #include "Instruction.h"
 
 typedef Instruction* (*Func)(string);
@@ -88,5 +89,6 @@ bool Instruction::needStallPipeline() {
 }
 
 bool Instruction::ableToFetchNext() {
-    return _currentStage != "IF";
+    cout << "last stage: " << _currentStage << endl;
+    return _currentStage != "BEGIN";
 }

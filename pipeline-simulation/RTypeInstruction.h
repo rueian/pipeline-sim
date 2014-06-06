@@ -34,6 +34,7 @@ protected:
 private:
     int getALUSrc(string);
     bool hazardHappened(string, string);
+    bool lwHazardHappened(string);
 };
 
 

@@ -18,6 +18,7 @@ CPU::~CPU() {
 
 void CPU::execute() {
     while ( ! allInstructionDone()) {
+        cout << "Fetch new ? " << instructionFetchable() << endl;
         if (instructionFetchable())
             instructionFetch();
         _programCounter++;
@@ -26,7 +27,7 @@ void CPU::execute() {
         for(auto& instruction : _pipeline) {
             instruction->goNextStage();
             if (instruction->needStallPipeline()) {
-                preservePCAndIFDI();
+                stallPipeline();
                 break;
             }
         }
@@ -96,7 +97,9 @@ void CPU::instructionFetch() {
     _pipeline.push_back(instruction);
 }
 
-void CPU::preservePCAndIFDI() {
+void CPU::stallPipeline() {
+    cout << "STALL!!!!!!!"<< endl;
+    _pipeline.pop_back();
     _registers.plRegNew["IF/ID"] = _registers.plReg["IF/ID"];
     _programCounter --;
 }

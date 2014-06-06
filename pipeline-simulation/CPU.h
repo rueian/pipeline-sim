@@ -29,7 +29,7 @@ private:
     bool instructionFetchable();
     bool allInstructionDone();
     void instructionFetch();
-    void preservePCAndIFDI();
+    void stallPipeline();
 };
 
 

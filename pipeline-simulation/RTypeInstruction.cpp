@@ -3,6 +3,7 @@
 // Copyright (c) 2014 ___FULLUSERNAME___. All rights reserved.
 //
 
+#include <iostream>
 #include "RTypeInstruction.h"
 
 RTypeInstruction::RTypeInstruction(string machineCode)
@@ -60,6 +61,8 @@ void RTypeInstruction::WBStage() {
 int RTypeInstruction::getALUSrc(string src) {
     if (hazardHappened("EX/MEM", src))
         return stoi(_regs->plReg["EX/MEM"]["ALUout"]);
+    else if (lwHazardHappened(src))
+        return stoi(_regs->plReg["MEM/WB"]["ReadData"]);
     else if (hazardHappened("MEM/WB", src))
         return stoi(_regs->plReg["MEM/WB"]["ALUout"]);
     string destination = (src == "Rs" ? "ReadData1" : "ReadData2");
@@ -70,8 +73,14 @@ bool RTypeInstruction::hazardHappened(string reg, string src) {
     return _regs->plReg[reg]["Rd"] != "0" && _regs->plReg[reg]["Rd"] == _regs->plReg["ID/EX"][src];
 }
 
+bool RTypeInstruction::lwHazardHappened(string src) {
+    return _regs->plReg["MEM/WB"]["Rt"] != "0" && _regs->plReg["MEM/WB"]["Rt"] == _regs->plReg["ID/EX"][src];
+}
+
 void RTypeInstruction::IFStage() {
     Instruction::IFStage();
     _regs->plRegNew["IF/ID"]["Rs"] = to_string(_rs);
     _regs->plRegNew["IF/ID"]["Rt"] = to_string(_rt);
+    cout << "RType IFStage Rs: " << _regs->plRegNew["IF/ID"]["Rs"] <<endl;
+    cout << "RType IFStage Rt: " << _regs->plRegNew["IF/ID"]["Rt"] <<endl;
 }
