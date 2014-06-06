@@ -39,7 +39,7 @@ public:
     static Instruction* instructionDecode(string, Memory*, Registers*, int*);
 
 protected:
-    void IFStage();
+    virtual void IFStage();
     virtual void formatInstruction() = 0;
     virtual void IDStage() = 0;
     virtual void EXStage() = 0;

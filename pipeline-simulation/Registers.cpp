@@ -21,6 +21,8 @@ map<string, map<string, string> > Registers::newPipelineRegs() {
     return {
             {"IF/ID", {
                     {"PC", ""},
+                    {"Rs", ""},
+                    {"Rt", ""},
                     {"Instruction", "00000000000000000000000000000000"}
             }},
             {"ID/EX", {

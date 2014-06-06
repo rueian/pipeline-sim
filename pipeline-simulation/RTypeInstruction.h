@@ -23,6 +23,9 @@ protected:
     string _funct;
 
     void formatInstruction();
+
+    virtual void IFStage() override;
+
     virtual void IDStage();
     virtual void EXStage();
     virtual void MEMStage();

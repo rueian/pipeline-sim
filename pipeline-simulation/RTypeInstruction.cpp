@@ -69,3 +69,9 @@ int RTypeInstruction::getALUSrc(string src) {
 bool RTypeInstruction::hazardHappened(string reg, string src) {
     return _regs->plReg[reg]["Rd"] != "0" && _regs->plReg[reg]["Rd"] == _regs->plReg["ID/EX"][src];
 }
+
+void RTypeInstruction::IFStage() {
+    Instruction::IFStage();
+    _regs->plRegNew["IF/ID"]["Rs"] = to_string(_rs);
+    _regs->plRegNew["IF/ID"]["Rt"] = to_string(_rt);
+}
