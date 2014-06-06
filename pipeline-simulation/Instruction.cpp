@@ -135,14 +135,11 @@ void Instruction::nopWBStage() {
 }
 
 void Instruction::formatInstruction() {
-    _opcode    = _machineCode.substr(0, 6);
     _rs        = Instruction::bitStringConvert(_machineCode.substr(6, 5));
     _rt        = Instruction::bitStringConvert(_machineCode.substr(11, 5));
     _rd        = Instruction::bitStringConvert(_machineCode.substr(16, 5));
     _shamt     = Instruction::bitStringConvert(_machineCode.substr(21, 5));
     _immediate = Instruction::bitStringConvert(_machineCode.substr(16, 16));
-    _target    = Instruction::bitStringConvert(_machineCode.substr(6, 26));
-    _funct     = _machineCode.substr(26, 6);
 }
 
 bool Instruction::needTakeBranch() {

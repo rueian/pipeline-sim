@@ -79,9 +79,12 @@ void CPU::instructionFetch() {
     instructionFetch(_programCounter);
 }
 
-void CPU::stallPipeline(int instructionIndex) {
-    if (instructionIndex+1 >= _pipeline.size()) return;
-    _pipeline[instructionIndex+1]->becomeNop();
+void CPU::stallPipeline(int i) {
+    if (_pipeline[i]->getCurrentStage() != "ID")
+        i++;
+    if (i >= _pipeline.size()) return;
+    cout << "STALL!!!" << endl;
+    _pipeline[i]->becomeNop();
     _pipeline.pop_back();
     _registers.plRegNew["IF/ID"] = _registers.plReg["IF/ID"];
     _programCounter --;
@@ -90,5 +93,6 @@ void CPU::stallPipeline(int instructionIndex) {
 
 void CPU::flushInstruction(int instructionIndex) {
     if (instructionIndex+1 >= _pipeline.size()) return;
+    cout << "FLUSH!!!" << endl;
     _pipeline[instructionIndex+1]->becomeNop();
 }

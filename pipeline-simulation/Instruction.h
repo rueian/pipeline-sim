@@ -40,14 +40,11 @@ public:
     static Instruction* instructionDecode(string, Memory*, Registers*, int*);
 
 protected:
-    string _opcode;
     int _rs;
     int _rt;
     int _rd;
     int _shamt;
     int _immediate;
-    int _target;
-    string _funct;
 
     virtual void IFStage();
     virtual void formatInstruction();

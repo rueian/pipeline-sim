@@ -13,6 +13,7 @@
 class BeqInstruction : public ITypeInstruction {
 public:
     BeqInstruction(string);
+    virtual bool needStallPipeline() override;
     virtual bool needTakeBranch() override;
 
 protected:
@@ -21,7 +22,11 @@ protected:
     virtual void IDStage() override;
 
 private:
+    bool IDStallPipeline();
     bool needTakeBranch(int, int);
+    bool hazardHappened(string, string);
+    int getALUsrc(string);
+
 };
 
 
