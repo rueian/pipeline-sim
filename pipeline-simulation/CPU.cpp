@@ -20,16 +20,18 @@ void CPU::execute() {
     while ( ! allInstructionDone()) {
         if (instructionFetchable())
             instructionFetch();
+
         _programCounter++;
         _registers.plRegNew["IF/ID"]["PC"] = to_string(_programCounter*4);
 
-        for(auto& instruction : _pipeline) {
-            instruction->goNextStage();
-            if (instruction->needStallPipeline()) {
+        for(int i = 0; i < _pipeline.size(); i++) {
+            _pipeline[i]->goNextStage();
+            if (_pipeline[i]->needStallPipeline()) {
+                _pipeline[i+1]->becomeNop();
                 stallPipeline();
-                break;
             }
         }
+
         _registers.updatePipeLineRegs();
         printStatus();
         _cycleCounter++;
@@ -90,13 +92,19 @@ bool CPU::allInstructionDone() {
     return !_pipeline.empty() && _pipeline.back()->isDone();
 }
 
-void CPU::instructionFetch() {
-    Instruction* instruction = Instruction::instructionDecode(_memory.getInstruction(_programCounter), &_memory, &_registers, &_programCounter);
+void CPU::instructionFetch(int pc) {
+    Instruction* instruction = Instruction::instructionDecode(_memory.getInstruction(pc), &_memory, &_registers, &_programCounter);
     _pipeline.push_back(instruction);
+}
+
+void CPU::instructionFetch() {
+    instructionFetch(_programCounter);
 }
 
 void CPU::stallPipeline() {
     _pipeline.pop_back();
     _registers.plRegNew["IF/ID"] = _registers.plReg["IF/ID"];
     _programCounter --;
+    instructionFetch(_programCounter-1);
 }
+

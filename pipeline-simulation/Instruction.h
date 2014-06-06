@@ -29,6 +29,7 @@ public:
     void goNextStage();
     bool isDone();
     virtual bool needStallPipeline();
+    Instruction* becomeNop();
     Instruction* setMemory(Memory*);
     Instruction* setRegisters(Registers*);
     Instruction* setProgramCounter(int*);
@@ -38,13 +39,27 @@ public:
     static Instruction* instructionDecode(string, Memory*, Registers*, int*);
 
 protected:
+    string _opcode;
+    int _rs;
+    int _rt;
+    int _rd;
+    int _shamt;
+    int _immediate;
+    int _target;
+    string _funct;
+
     virtual void IFStage();
-    virtual void formatInstruction() = 0;
+    virtual void formatInstruction();
     virtual void IDStage() = 0;
     virtual void EXStage() = 0;
     virtual void MEMStage() = 0;
     virtual void WBStage() = 0;
     virtual int ALUResult(int, int) = 0;
+
+    void nopIDStage();
+    void nopEXStage();
+    void nopMEMStage();
+    void nopWBStage();
 
     Memory *_memory;
     Registers *_regs;
@@ -52,6 +67,7 @@ protected:
     string _currentStage;
     string _machineCode;
     string _controlSginal;
+    bool _nop;
 
 private:
     static map<string, Func> _instructionMap;

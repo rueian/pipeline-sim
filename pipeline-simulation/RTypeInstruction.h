@@ -15,17 +15,7 @@ public:
     ~RTypeInstruction();
 
 protected:
-    string _opcode;
-    int _rs;
-    int _rt;
-    int _rd;
-    int _shamt;
-    string _funct;
-
-    void formatInstruction();
-
     virtual void IFStage() override;
-
     virtual void IDStage();
     virtual void EXStage();
     virtual void MEMStage();

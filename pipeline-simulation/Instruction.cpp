@@ -14,16 +14,16 @@ void Instruction::goNextStage() {
         IFStage();
         _currentStage = "IF";
     } else if (_currentStage == "IF") {
-        IDStage();
+        _nop ? nopIDStage() : IDStage();
         _currentStage = "ID";
     } else if (_currentStage == "ID") {
-        EXStage();
+        _nop ? nopEXStage() : EXStage();
         _currentStage = "EX";
     } else if (_currentStage == "EX") {
-        MEMStage();
+        _nop ? nopMEMStage() : MEMStage();
         _currentStage = "MEM";
     } else if (_currentStage == "MEM") {
-        WBStage();
+        _nop ? nopWBStage() : WBStage();
         _currentStage = "DONE";
     }
 }
@@ -76,6 +76,7 @@ void Instruction::IFStage() {
 }
 
 Instruction::Instruction(string machineCode) {
+    _nop = false;
     _currentStage = "BEGIN";
     _machineCode  = machineCode;
 }
@@ -86,4 +87,55 @@ bool Instruction::isDone() {
 
 bool Instruction::needStallPipeline() {
     return false;
+}
+
+Instruction* Instruction::becomeNop() {
+    _nop = true;
+    return this;
+}
+
+void Instruction::nopIDStage() {
+    _regs->plRegNew["ID/EX"] = {
+            {"ReadData1", to_string((int)_regs->reg[_rs])},
+            {"ReadData2", to_string((int)_regs->reg[_rt])},
+            {"sign_ext", "0"},
+            {"Rs", to_string(_rs)},
+            {"Rt", to_string(_rt)},
+            {"Rd", to_string(_rd)},
+            {"Control Signals", "000000000"}
+    };
+}
+
+void Instruction::nopEXStage() {
+    _regs->plRegNew["EX/MEM"] = {
+            {"ALUout", "0"},
+            {"WriteData", "0"},
+            {"Rt", ""},
+            {"Rd", _regs->plReg["ID/EX"]["Rd"]},
+            {"Control Signals", "00000"}
+    };
+}
+
+void Instruction::nopMEMStage() {
+    _regs->plRegNew["MEM/WB"] = {
+            {"ReadData", "0"},
+            {"ALUout", "0"},
+            {"Rd", _regs->plReg["EX/MEM"]["Rd"]},
+            {"Control Signals", "00"}
+    };
+}
+
+void Instruction::nopWBStage() {
+
+}
+
+void Instruction::formatInstruction() {
+    _opcode    = _machineCode.substr(0, 6);
+    _rs        = Instruction::bitStringConvert(_machineCode.substr(6, 5));
+    _rt        = Instruction::bitStringConvert(_machineCode.substr(11, 5));
+    _rd        = Instruction::bitStringConvert(_machineCode.substr(16, 5));
+    _shamt     = Instruction::bitStringConvert(_machineCode.substr(21, 5));
+    _immediate = Instruction::bitStringConvert(_machineCode.substr(16, 16));
+    _target    = Instruction::bitStringConvert(_machineCode.substr(6, 26));
+    _funct     = _machineCode.substr(26, 6);
 }

@@ -16,12 +16,6 @@ public:
     ~ITypeInstruction();
 
 protected:
-    string _opcode;
-    int _rs;
-    int _rt;
-    int _immediate;
-
-    void formatInstruction();
     virtual void IDStage();
     virtual void EXStage();
     virtual void MEMStage();
