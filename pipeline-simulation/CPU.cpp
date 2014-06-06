@@ -25,6 +25,10 @@ void CPU::execute() {
 
         for(auto& instruction : _pipeline) {
             instruction->goNextStage();
+            if (instruction->needStallPipeline()) {
+                preservePCAndIFDI();
+                break;
+            }
         }
         _registers.updatePipeLineRegs();
         printStatus();
@@ -79,7 +83,8 @@ void CPU::printStatus() {
 }
 
 bool CPU::instructionFetchable() {
-    return _programCounter < _memory.getInstructionCount();
+    bool fetchable = (!_pipeline.empty() ? _pipeline.back()->ableToFetchNext() : true);
+    return _programCounter < _memory.getInstructionCount() && fetchable;
 }
 
 bool CPU::allInstructionDone() {
@@ -89,4 +94,9 @@ bool CPU::allInstructionDone() {
 void CPU::instructionFetch() {
     Instruction* instruction = Instruction::instructionDecode(_memory.getInstruction(_programCounter), &_memory, &_registers, &_programCounter);
     _pipeline.push_back(instruction);
+}
+
+void CPU::preservePCAndIFDI() {
+    _registers.plRegNew["IF/ID"] = _registers.plReg["IF/ID"];
+    _programCounter --;
 }

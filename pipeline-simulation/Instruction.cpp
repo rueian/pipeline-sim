@@ -82,3 +82,11 @@ Instruction::Instruction(string machineCode) {
 bool Instruction::isDone() {
     return _currentStage == "DONE";
 }
+
+bool Instruction::needStallPipeline() {
+    return false;
+}
+
+bool Instruction::ableToFetchNext() {
+    return _currentStage != "IF";
+}

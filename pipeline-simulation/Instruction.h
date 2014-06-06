@@ -28,6 +28,8 @@ public:
     string getCurrentStage();
     void goNextStage();
     bool isDone();
+    bool ableToFetchNext();
+    virtual bool needStallPipeline();
     Instruction* setMemory(Memory*);
     Instruction* setRegisters(Registers*);
     Instruction* setProgramCounter(int*);

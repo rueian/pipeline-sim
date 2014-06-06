@@ -29,6 +29,7 @@ private:
     bool instructionFetchable();
     bool allInstructionDone();
     void instructionFetch();
+    void preservePCAndIFDI();
 };
 
 
