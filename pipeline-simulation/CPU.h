@@ -31,6 +31,7 @@ private:
     void instructionFetch();
     void instructionFetch(int);
     void stallPipeline(int);
+    void flushInstruction(int);
 };
 
 

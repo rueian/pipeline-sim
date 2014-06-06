@@ -57,6 +57,7 @@ protected:
     virtual void WBStage() = 0;
     virtual int ALUResult(int, int) = 0;
 
+    void nopIFStage();
     void nopIDStage();
     void nopEXStage();
     void nopMEMStage();

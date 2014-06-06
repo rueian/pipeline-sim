@@ -11,7 +11,7 @@ map<string, Func> Instruction::_instructionMap = map<string, Func>();
 
 void Instruction::goNextStage() {
     if (_currentStage == "BEGIN") {
-        IFStage();
+        _nop ? nopIFStage() : IFStage();
         _currentStage = "IF";
     } else if (_currentStage == "IF") {
         _nop ? nopIDStage() : IDStage();
@@ -92,6 +92,11 @@ bool Instruction::needStallPipeline() {
 Instruction* Instruction::becomeNop() {
     _nop = true;
     return this;
+}
+
+void Instruction::nopIFStage() {
+    _machineCode = "00000000000000000000000000000000";
+    IFStage();
 }
 
 void Instruction::nopIDStage() {

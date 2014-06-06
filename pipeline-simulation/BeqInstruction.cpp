@@ -22,7 +22,7 @@ void BeqInstruction::IDStage() {
     ITypeInstruction::IDStage();
 
     if (needTakeBranch((int) _regs->reg[_rs], (int) _regs->reg[_rt]))
-        _programCounter += _immediate;
+        *(_programCounter) = stoi(_regs->plReg["IF/ID"]["PC"])/4 + _immediate;
 }
 
 bool BeqInstruction::needTakeBranch() {
