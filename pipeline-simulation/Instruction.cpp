@@ -106,12 +106,12 @@ void Instruction::nopIFStage() {
 
 void Instruction::nopIDStage() {
     _regs->plRegNew["ID/EX"] = {
-            {"ReadData1", to_string((int)_regs->reg[_rs])},
-            {"ReadData2", to_string((int)_regs->reg[_rt])},
+            {"ReadData1", "0"},
+            {"ReadData2", "0"},
             {"sign_ext", "0"},
-            {"Rs", to_string(_rs)},
-            {"Rt", to_string(_rt)},
-            {"Rd", to_string(_rd)},
+            {"Rs", "0"},
+            {"Rt", "0"},
+            {"Rd", "0"},
             {"Control Signals", "000000000"}
     };
 }
@@ -120,8 +120,8 @@ void Instruction::nopEXStage() {
     _regs->plRegNew["EX/MEM"] = {
             {"ALUout", "0"},
             {"WriteData", "0"},
-            {"Rt", ""},
-            {"Rd", _regs->plReg["ID/EX"]["Rd"]},
+            {"Rt", "0"},
+            {"Rd", ""},
             {"Control Signals", "00000"}
     };
 }
@@ -130,7 +130,7 @@ void Instruction::nopMEMStage() {
     _regs->plRegNew["MEM/WB"] = {
             {"ReadData", "0"},
             {"ALUout", "0"},
-            {"Rd", _regs->plReg["EX/MEM"]["Rd"]},
+            {"Rd", "0"},
             {"Control Signals", "00"}
     };
 }

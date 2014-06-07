@@ -27,7 +27,7 @@ public:
 
     string getCurrentStage();
     void goNextStage();
-    bool isDone();
+    virtual bool isDone();
     virtual bool needStallPipeline();
     virtual bool needTakeBranch();
     Instruction* becomeNop();
