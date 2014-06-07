@@ -22,6 +22,7 @@ protected:
     virtual void IDStage() override;
     virtual void EXStage() override;
     virtual void MEMStage() override;
+    virtual bool isDone() override;
 
 private:
     bool IDStallPipeline();

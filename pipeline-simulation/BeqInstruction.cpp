@@ -67,4 +67,9 @@ int BeqInstruction::getALUsrc(string src) {
     return  (int)(src == "Rs" ? _regs->reg[_rs] : _regs->reg[_rt]);
 }
 
+bool BeqInstruction::isDone() {
+    return _currentStage == "MEM";
+}
+
 REGISTER_INSTRUCTION(000100, BeqInstruction)
+
