@@ -23,7 +23,15 @@ void BeqInstruction::IDStage() {
     if (IDStallPipeline())
         return Instruction::nopIDStage();
 
-    ITypeInstruction::IDStage();
+    _regs->plRegNew["ID/EX"] = {
+            {"ReadData1", to_string(getALUsrc("Rs"))},
+            {"ReadData2", to_string(getALUsrc("Rt"))},
+            {"sign_ext", to_string(_immediate)},
+            {"Rs", to_string(_rs)},
+            {"Rt", to_string(_rt)},
+            {"Rd", "0"},
+            {"Control Signals", _controlSginal}
+    };
     if (needTakeBranch(getALUsrc("Rs"), getALUsrc("Rt")))
         *(_programCounter) = stoi(_regs->plReg["IF/ID"]["PC"])/4 + _immediate;
 }
