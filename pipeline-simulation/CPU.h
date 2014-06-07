@@ -3,6 +3,7 @@
 // Copyright (c) 2014 ___FULLUSERNAME___. All rights reserved.
 //
 #include <vector>
+#include <fstream>
 #include "Memory.h"
 #include "Instruction.h"
 #include "Registers.h"
@@ -16,8 +17,7 @@ class CPU {
 public:
     CPU(Registers&, Memory&);
     ~CPU();
-    void execute();
-    void printStatus();
+    void execute(string);
 
 private:
     int _programCounter;
@@ -32,6 +32,7 @@ private:
     void instructionFetch(int);
     void stallPipeline(int);
     void flushInstruction(int);
+    void printStatus(ofstream&);
 };
 
 

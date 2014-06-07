@@ -3,7 +3,6 @@
 // Copyright (c) 2014 ___FULLUSERNAME___. All rights reserved.
 //
 
-#include <iostream>
 #import <iomanip>
 #include "CPU.h"
 
@@ -16,7 +15,9 @@ CPU::CPU(Registers& regs, Memory& ram)
 CPU::~CPU() {
 }
 
-void CPU::execute() {
+void CPU::execute(string outFile) {
+    ofstream fout;
+    fout.open(outFile);
     while ( ! allInstructionDone()) {
         if (instructionFetchable())
             instructionFetch();
@@ -33,33 +34,34 @@ void CPU::execute() {
         }
 
         _registers.updatePipeLineRegs();
-        printStatus();
+        printStatus(fout);
         _cycleCounter++;
     }
+    fout.close();
 }
 
-void CPU::printStatus() {
-    cout << "CC " << _cycleCounter << ":" << endl << endl;
-    cout << "Registers:" << endl;
+void CPU::printStatus(ofstream& fout) {
+    fout << "CC " << _cycleCounter << ":" << endl << endl;
+    fout << "Registers:" << endl;
     for (int i = 0 ; i < _registers.reg.size(); i++) {
-        cout << "$" << i << ": " << setw(4) << left << _registers.reg[i];
-        if (i != 0 && (i+1) % 3 == 0) cout << endl;
+        fout << "$" << i << ": " << setw(4) << left << _registers.reg[i];
+        if (i != 0 && (i+1) % 3 == 0) fout << endl;
     }
-    cout << endl;
-    cout << "Data Memory:" << endl;
+    fout << endl;
+    fout << "Data Memory:" << endl;
     for (auto v : {"0","4","8","12","16"})
-        cout << setfill('0') << setw(2) << v << ":" << setfill(' ') << setw(6) << right << _memory.getDataMemory(v) << endl;
-    cout << endl;
+        fout << setfill('0') << setw(2) << v << ":" << setfill(' ') << setw(6) << right << _memory.getDataMemory(v) << endl;
+    fout << endl;
     map<string, vector<string>> pipelineRegistersIndex = {{"IF/ID", {"PC", "Instruction"}},{"ID/EX", {"ReadData1","ReadData2","sign_ext","Rs","Rt","Rd","Control Signals"}},{"EX/MEM", {"ALUout","WriteData","Rt","Rd","Control Signals"}},{"MEM/WB", {"ReadData","ALUout","Control Signals"}}};
     for (auto k : {"IF/ID","ID/EX","EX/MEM","MEM/WB"}) {
-        cout << k << ":" << endl;
+        fout << k << ":" << endl;
         for (auto v : pipelineRegistersIndex[k]) {
             if (!(strcmp(k, "EX/MEM") == 0 && v == "Rt" && _registers.plReg[k][v] == "") && !(strcmp(k, "EX/MEM") == 0 && v == "Rd" && _registers.plReg[k][v] == ""))
-                cout << setw(17) << left << v << _registers.plReg[k][v] << endl;
+                fout << setw(17) << left << v << _registers.plReg[k][v] << endl;
         }
-        cout << endl;
+        fout << endl;
     }
-    cout << "=================================================================" << endl;
+    fout << "=================================================================" << endl;
 }
 
 bool CPU::instructionFetchable() {
@@ -67,7 +69,7 @@ bool CPU::instructionFetchable() {
 }
 
 bool CPU::allInstructionDone() {
-    return !_pipeline.empty() && _pipeline.back()->isDone();
+    return (!_pipeline.empty() && _pipeline.back()->isDone()) || _memory.getInstructionCount() == 0;
 }
 
 void CPU::instructionFetch(int pc) {
@@ -83,7 +85,6 @@ void CPU::stallPipeline(int i) {
     if (_pipeline[i]->getCurrentStage() != "ID")
         i++;
     if (i >= _pipeline.size()) return;
-    cout << "STALL!!!" << endl;
     _pipeline[i]->becomeNop();
     _pipeline.pop_back();
     _registers.plRegNew["IF/ID"] = _registers.plReg["IF/ID"];
@@ -93,6 +94,5 @@ void CPU::stallPipeline(int i) {
 
 void CPU::flushInstruction(int instructionIndex) {
     if (instructionIndex+1 >= _pipeline.size()) return;
-    cout << "FLUSH!!!" << endl;
     _pipeline[instructionIndex+1]->becomeNop();
 }
