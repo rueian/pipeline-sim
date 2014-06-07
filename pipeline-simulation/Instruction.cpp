@@ -22,9 +22,11 @@ void Instruction::goNextStage() {
     } else if (_currentStage == "EX") {
         _nop ? nopMEMStage() : MEMStage();
         _currentStage = "MEM";
+        nopIFStage();
     } else if (_currentStage == "MEM") {
         _nop ? nopWBStage() : WBStage();
         _currentStage = "DONE";
+        nopIDStage();
     }
 }
 
@@ -91,12 +93,15 @@ bool Instruction::needStallPipeline() {
 
 Instruction* Instruction::becomeNop() {
     _nop = true;
+    _machineCode = "00000000000000000000000000000000";
+    formatInstruction();
     return this;
 }
 
 void Instruction::nopIFStage() {
-    _machineCode = "00000000000000000000000000000000";
-    IFStage();
+    _regs->plRegNew["IF/ID"]["Instruction"] = "00000000000000000000000000000000";
+    _regs->plRegNew["IF/ID"]["Rs"] = "";
+    _regs->plRegNew["IF/ID"]["Rt"] = "";
 }
 
 void Instruction::nopIDStage() {
