@@ -3,7 +3,7 @@
 // Copyright (c) 2014 ___FULLUSERNAME___. All rights reserved.
 //
 
-#import <iomanip>
+#include <iomanip>
 #include "CPU.h"
 
 using namespace std;
