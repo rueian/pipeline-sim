@@ -20,6 +20,8 @@ protected:
     virtual int ALUResult(int, int);
     virtual int readDataMemory();
     virtual void IDStage() override;
+    virtual void EXStage() override;
+    virtual void MEMStage() override;
 
 private:
     bool IDStallPipeline();

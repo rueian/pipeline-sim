@@ -28,6 +28,14 @@ void BeqInstruction::IDStage() {
         *(_programCounter) = stoi(_regs->plReg["IF/ID"]["PC"])/4 + _immediate;
 }
 
+void BeqInstruction::EXStage() {
+    Instruction::nopEXStage();
+}
+
+void BeqInstruction::MEMStage() {
+    Instruction::nopMEMStage();
+}
+
 bool BeqInstruction::IDStallPipeline() {
     return _regs->plReg["IF/ID"]["Rs"] == _regs->plReg["ID/EX"]["Rd"] ||
            _regs->plReg["IF/ID"]["Rt"] == _regs->plReg["ID/EX"]["Rd"];
