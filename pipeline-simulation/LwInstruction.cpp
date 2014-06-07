@@ -29,4 +29,4 @@ bool LwInstruction::needStallPipeline() {
     return false;
 }
 
-REGISTER_INSTRUCTION(100011, LwInstruction)
+//REGISTER_INSTRUCTION(100011, LwInstruction)

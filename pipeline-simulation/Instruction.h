@@ -3,12 +3,12 @@
 // Copyright (c) 2014 ___FULLUSERNAME___. All rights reserved.
 //
 
-#define REGISTER_INSTRUCTION(code, class)\
-__attribute__((constructor)) void register##class() { \
-    Instruction::registerInstruction(#code, [](string machineCode){ \
-        return (Instruction*)new class(machineCode); \
-    }); \
-}
+//#define REGISTER_INSTRUCTION(code, class)\
+//__attribute__((constructor)) void register##class() { \
+//    Instruction::registerInstruction(#code, [](string machineCode){ \
+//        return (Instruction*)new class(machineCode); \
+//    }); \
+//}
 
 #include <string>
 #include <map>
