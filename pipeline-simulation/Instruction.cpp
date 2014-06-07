@@ -22,11 +22,13 @@ void Instruction::goNextStage() {
     } else if (_currentStage == "EX") {
         _nop ? nopMEMStage() : MEMStage();
         _currentStage = "MEM";
-        nopIFStage();
     } else if (_currentStage == "MEM") {
         _nop ? nopWBStage() : WBStage();
         _currentStage = "DONE";
+        nopIFStage();
         nopIDStage();
+        nopEXStage();
+        nopMEMStage();
     }
 }
 
