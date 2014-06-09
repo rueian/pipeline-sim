@@ -24,4 +24,4 @@ void SwInstruction::MEMStage() {
     _memory->setDataMemory(_regs->plReg["EX/MEM"]["ALUout"], stoi(_regs->plReg["EX/MEM"]["ReadData2"]));
 }
 
-//REGISTER_INSTRUCTION(001000, SwInstruction)
+REGISTER_INSTRUCTION(001000, SwInstruction)

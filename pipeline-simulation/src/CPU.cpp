@@ -53,10 +53,10 @@ void CPU::printStatus(ofstream& fout) {
         fout << setfill('0') << setw(2) << v << ":" << setfill(' ') << setw(6) << right << _memory.getDataMemory(v) << endl;
     fout << endl;
     map<string, vector<string>> pipelineRegistersIndex = {{"IF/ID", {"PC", "Instruction"}},{"ID/EX", {"ReadData1","ReadData2","sign_ext","Rs","Rt","Rd","Control Signals"}},{"EX/MEM", {"ALUout","WriteData","Rt","Rd","Control Signals"}},{"MEM/WB", {"ReadData","ALUout","Control Signals"}}};
-    for (auto k : {"IF/ID","ID/EX","EX/MEM","MEM/WB"}) {
+    for (string k : {"IF/ID","ID/EX","EX/MEM","MEM/WB"}) {
         fout << k << ":" << endl;
         for (auto v : pipelineRegistersIndex[k]) {
-            if (!(strcmp(k, "EX/MEM") == 0 && v == "Rt" && _registers.plReg[k][v] == "") && !(strcmp(k, "EX/MEM") == 0 && v == "Rd" && _registers.plReg[k][v] == ""))
+            if (!(k.compare("EX/MEM") == 0 && v == "Rt" && _registers.plReg[k][v] == "") && !(k.compare("EX/MEM") == 0 && v == "Rd" && _registers.plReg[k][v] == ""))
                 fout << setw(17) << left << v << _registers.plReg[k][v] << endl;
         }
         fout << endl;

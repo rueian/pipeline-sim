@@ -79,5 +79,5 @@ bool BeqInstruction::isDone() {
     return _currentStage == "MEM";
 }
 
-//REGISTER_INSTRUCTION(000100, BeqInstruction)
+REGISTER_INSTRUCTION(000100, BeqInstruction)
 

@@ -13,5 +13,5 @@ BneInstruction::BneInstruction(string string1)
 : BeqInstruction(string1) {
 }
 
-//REGISTER_INSTRUCTION(000101, BneInstruction);
+REGISTER_INSTRUCTION(000101, BneInstruction);
 
