@@ -25,6 +25,7 @@ void Instruction::goNextStage() {
     } else if (_currentStage == "MEM") {
         _nop ? nopWBStage() : WBStage();
         _currentStage = "DONE";
+        becomeNop();
         nopIFStage();
         nopIDStage();
         nopEXStage();
