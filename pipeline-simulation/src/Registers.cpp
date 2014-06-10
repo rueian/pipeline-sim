@@ -13,7 +13,7 @@ Registers::Registers(vector<int> regs) {
 }
 
 void Registers::updatePipeLineRegs() {
-    plReg = map<string, map<string, string> >(plRegNew);
+    plReg = plRegNew;
 }
 
 map<string, map<string, string> > Registers::newPipelineRegs() {
