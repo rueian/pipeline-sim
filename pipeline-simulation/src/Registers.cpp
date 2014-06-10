@@ -14,7 +14,6 @@ Registers::Registers(vector<int> regs) {
 
 void Registers::updatePipeLineRegs() {
     plReg = map<string, map<string, string> >(plRegNew);
-//    plRegNew = Registers::newPipelineRegs();
 }
 
 map<string, map<string, string> > Registers::newPipelineRegs() {
