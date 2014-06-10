@@ -66,9 +66,3 @@ bool RTypeInstruction::hazardHappened(string reg, string src) {
 bool RTypeInstruction::lwHazardHappened(string src) {
     return _regs->plReg["MEM/WB"]["Rt"] != "0" && _regs->plReg["MEM/WB"]["Rt"] == _regs->plReg["ID/EX"][src];
 }
-
-void RTypeInstruction::IFStage() {
-    Instruction::IFStage();
-    _regs->plRegNew["IF/ID"]["Rs"] = to_string(_rs);
-    _regs->plRegNew["IF/ID"]["Rt"] = to_string(_rt);
-}

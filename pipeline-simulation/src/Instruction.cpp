@@ -78,6 +78,8 @@ int Instruction::bitStringConvert(string bitString) {
 void Instruction::IFStage() {
     formatInstruction();
     _regs->plRegNew["IF/ID"]["Instruction"] = _machineCode;
+    _regs->plRegNew["IF/ID"]["Rs"] = to_string(_rs);
+    _regs->plRegNew["IF/ID"]["Rt"] = to_string(_rt);
 }
 
 Instruction::Instruction(string machineCode) {
@@ -103,8 +105,8 @@ Instruction* Instruction::becomeNop() {
 
 void Instruction::nopIFStage() {
     _regs->plRegNew["IF/ID"]["Instruction"] = "00000000000000000000000000000000";
-    _regs->plRegNew["IF/ID"]["Rs"] = "";
-    _regs->plRegNew["IF/ID"]["Rt"] = "";
+    _regs->plRegNew["IF/ID"]["Rs"] = "0";
+    _regs->plRegNew["IF/ID"]["Rt"] = "0";
 }
 
 void Instruction::nopIDStage() {

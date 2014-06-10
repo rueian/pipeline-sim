@@ -15,7 +15,6 @@ public:
     ~RTypeInstruction();
 
 protected:
-    virtual void IFStage() override;
     virtual void IDStage();
     virtual void EXStage();
     virtual void MEMStage();

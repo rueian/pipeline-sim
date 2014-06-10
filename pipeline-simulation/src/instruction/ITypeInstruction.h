@@ -21,8 +21,6 @@ protected:
     virtual void MEMStage();
     virtual void WBStage();
     virtual int readDataMemory() = 0;
-
-    virtual void IFStage() override;
 };
 
 
