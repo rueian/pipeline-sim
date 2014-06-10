@@ -54,9 +54,7 @@ bool BeqInstruction::needStallPipeline() {
 }
 
 bool BeqInstruction::needTakeBranch() {
-    if (_currentStage == "ID")
-        return needTakeBranch(getALUsrc("Rs"), getALUsrc("Rt"));
-    return false;
+    return _currentStage == "ID" && needTakeBranch(getALUsrc("Rs"), getALUsrc("Rt"));
 }
 
 bool BeqInstruction::needTakeBranch(int data1, int data2) {
