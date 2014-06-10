@@ -23,18 +23,18 @@ sign_ext         0
 Rs               0
 Rt               0
 Rd               0
-Control Signals  000000000
+Control signals  000000000
 
 EX/MEM:
 ALUout           0
 WriteData        0
 Rt               0
-Control Signals  00000
+Control signals  00000
 
 MEM/WB:
 ReadData         0
 ALUout           0
-Control Signals  00
+Control signals  00
 
 =================================================================
 CC 2:
@@ -62,18 +62,18 @@ sign_ext         8
 Rs               8
 Rt               1
 Rd               0
-Control Signals  000101011
+Control signals  000101011
 
 EX/MEM:
 ALUout           0
 WriteData        0
 Rt               0
-Control Signals  00000
+Control signals  00000
 
 MEM/WB:
 ReadData         0
 ALUout           0
-Control Signals  00
+Control signals  00
 
 =================================================================
 CC 3:
@@ -101,18 +101,18 @@ sign_ext         0
 Rs               6
 Rt               7
 Rd               2
-Control Signals  110000010
+Control signals  110000010
 
 EX/MEM:
 ALUout           16
 WriteData        0
 Rt               1
-Control Signals  01011
+Control signals  01011
 
 MEM/WB:
 ReadData         0
 ALUout           0
-Control Signals  00
+Control signals  00
 
 =================================================================
 CC 4:
@@ -140,18 +140,18 @@ sign_ext         0
 Rs               5
 Rt               4
 Rd               3
-Control Signals  110000010
+Control signals  110000010
 
 EX/MEM:
 ALUout           -1
 WriteData        0
 Rd               2
-Control Signals  00010
+Control signals  00010
 
 MEM/WB:
 ReadData         5
 ALUout           16
-Control Signals  11
+Control signals  11
 
 =================================================================
 CC 5:
@@ -179,18 +179,18 @@ sign_ext         0
 Rs               0
 Rt               0
 Rd               0
-Control Signals  000000000
+Control signals  000000000
 
 EX/MEM:
 ALUout           0
 WriteData        0
 Rd               3
-Control Signals  00010
+Control signals  00010
 
 MEM/WB:
 ReadData         0
 ALUout           -1
-Control Signals  10
+Control signals  10
 
 =================================================================
 CC 6:
@@ -218,18 +218,18 @@ sign_ext         0
 Rs               0
 Rt               0
 Rd               0
-Control Signals  000000000
+Control signals  000000000
 
 EX/MEM:
 ALUout           0
 WriteData        0
 Rt               0
-Control Signals  00000
+Control signals  00000
 
 MEM/WB:
 ReadData         0
 ALUout           0
-Control Signals  10
+Control signals  10
 
 =================================================================
 CC 7:
@@ -257,17 +257,17 @@ sign_ext         0
 Rs               0
 Rt               0
 Rd               0
-Control Signals  000000000
+Control signals  000000000
 
 EX/MEM:
 ALUout           0
 WriteData        0
 Rt               0
-Control Signals  00000
+Control signals  00000
 
 MEM/WB:
 ReadData         0
 ALUout           0
-Control Signals  00
+Control signals  00
 
 =================================================================

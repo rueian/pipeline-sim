@@ -115,7 +115,7 @@ void Instruction::nopIDStage() {
             {"Rs", "0"},
             {"Rt", "0"},
             {"Rd", "0"},
-            {"Control Signals", "000000000"}
+            {"Control signals", "000000000"}
     };
 }
 
@@ -125,7 +125,7 @@ void Instruction::nopEXStage() {
             {"WriteData", "0"},
             {"Rt", "0"},
             {"Rd", ""},
-            {"Control Signals", "00000"}
+            {"Control signals", "00000"}
     };
 }
 
@@ -134,7 +134,7 @@ void Instruction::nopMEMStage() {
             {"ReadData", "0"},
             {"ALUout", "0"},
             {"Rd", "0"},
-            {"Control Signals", "00"}
+            {"Control signals", "00"}
     };
 }
 

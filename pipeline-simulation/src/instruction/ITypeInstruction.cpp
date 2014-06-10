@@ -27,7 +27,7 @@ void ITypeInstruction::IDStage() {
             {"Rs", to_string(_rs)},
             {"Rt", to_string(_rt)},
             {"Rd", "0"},
-            {"Control Signals", _controlSignal}
+            {"Control signals", _controlSignal}
     };
 }
 
@@ -41,7 +41,7 @@ void ITypeInstruction::EXStage() {
             {"WriteData", _controlSignal.substr(6, 1)},
             {"Rt", _regs->plReg["ID/EX"]["Rt"]},
             {"Rd", ""},
-            {"Control Signals", _controlSignal.substr(4, 5)}
+            {"Control signals", _controlSignal.substr(4, 5)}
     };
 }
 
@@ -50,7 +50,7 @@ void ITypeInstruction::MEMStage() {
             {"ReadData", to_string(readDataMemory())},
             {"ALUout", _regs->plReg["EX/MEM"]["ALUout"]},
             {"Rd", ""},
-            {"Control Signals", _controlSignal.substr(7, 2)}
+            {"Control signals", _controlSignal.substr(7, 2)}
     };
 }
 

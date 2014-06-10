@@ -52,7 +52,7 @@ void CPU::printStatus(ofstream& fout) {
     for (auto v : {"0","4","8","12","16"})
         fout << setfill('0') << setw(2) << v << ":" << setfill(' ') << setw(6) << right << _memory.getDataMemory(v) << endl;
     fout << endl;
-    map<string, vector<string>> pipelineRegistersIndex = {{"IF/ID", {"PC", "Instruction"}},{"ID/EX", {"ReadData1","ReadData2","sign_ext","Rs","Rt","Rd","Control Signals"}},{"EX/MEM", {"ALUout","WriteData","Rt","Rd","Control Signals"}},{"MEM/WB", {"ReadData","ALUout","Control Signals"}}};
+    map<string, vector<string>> pipelineRegistersIndex = {{"IF/ID", {"PC", "Instruction"}},{"ID/EX", {"ReadData1","ReadData2","sign_ext","Rs","Rt","Rd","Control signals"}},{"EX/MEM", {"ALUout","WriteData","Rt","Rd","Control signals"}},{"MEM/WB", {"ReadData","ALUout","Control signals"}}};
     for (string k : {"IF/ID","ID/EX","EX/MEM","MEM/WB"}) {
         fout << k << ":" << endl;
         for (auto v : pipelineRegistersIndex[k]) {

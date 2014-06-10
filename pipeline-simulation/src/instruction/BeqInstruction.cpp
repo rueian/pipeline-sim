@@ -30,7 +30,7 @@ void BeqInstruction::IDStage() {
             {"Rs", to_string(_rs)},
             {"Rt", to_string(_rt)},
             {"Rd", "0"},
-            {"Control Signals", _controlSignal}
+            {"Control signals", _controlSignal}
     };
     if (needTakeBranch(getALUsrc("Rs"), getALUsrc("Rt")))
         *(_programCounter) = stoi(_regs->plReg["IF/ID"]["PC"])/4 + _immediate;
