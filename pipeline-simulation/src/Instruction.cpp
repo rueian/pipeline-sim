@@ -7,7 +7,7 @@
 #include "Instruction.h"
 
 typedef Instruction* (*Func)(string);
-map<string, Func> Instruction::_instructionMap = map<string, Func>();
+map<string, Func> Instruction::_instructionMap __attribute__((init_priority(101)));
 
 void Instruction::goNextStage() {
     if (_currentStage == "BEGIN") {
@@ -22,15 +22,18 @@ void Instruction::goNextStage() {
     } else if (_currentStage == "EX") {
         _nop ? nopMEMStage() : MEMStage();
         _currentStage = "MEM";
-        nopIFStage();
     } else if (_currentStage == "MEM") {
         _nop ? nopWBStage() : WBStage();
         _currentStage = "DONE";
+        nopIFStage();
         nopIDStage();
+        nopEXStage();
+        nopMEMStage();
     }
 }
 
 void Instruction::registerInstruction(string code, Func func) {
+    cout << "registering "+code+"\n";
     _instructionMap[code] = func;
 }
 

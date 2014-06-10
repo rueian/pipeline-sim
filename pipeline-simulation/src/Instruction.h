@@ -4,7 +4,7 @@
 //
 
 #define REGISTER_INSTRUCTION(code, class)\
-__attribute__((constructor)) void register##class() { \
+__attribute__((constructor(103))) void register##class() { \
     Instruction::registerInstruction(#code, [](string machineCode){ \
         return (Instruction*)new class(machineCode); \
     }); \
@@ -35,8 +35,8 @@ public:
     Instruction* setRegisters(Registers*);
     Instruction* setProgramCounter(int*);
 
-    static void registerInstruction(string, Func);
     static int bitStringConvert(string);
+    static void registerInstruction(string, Func);
     static Instruction* instructionDecode(string, Memory*, Registers*, int*);
 
 protected:
@@ -46,12 +46,20 @@ protected:
     int _shamt;
     int _immediate;
 
+    bool _nop;
+    int *_programCounter;
+    Memory *_memory;
+    Registers *_regs;
+    string _currentStage;
+    string _machineCode;
+    string _controlSginal;
+
     virtual void IFStage();
-    virtual void formatInstruction();
     virtual void IDStage() = 0;
     virtual void EXStage() = 0;
     virtual void MEMStage() = 0;
     virtual void WBStage() = 0;
+    virtual void formatInstruction();
     virtual int ALUResult(int, int) = 0;
 
     void nopIFStage();
@@ -59,14 +67,6 @@ protected:
     void nopEXStage();
     void nopMEMStage();
     void nopWBStage();
-
-    Memory *_memory;
-    Registers *_regs;
-    int *_programCounter;
-    string _currentStage;
-    string _machineCode;
-    string _controlSginal;
-    bool _nop;
 
 private:
     static map<string, Func> _instructionMap;
