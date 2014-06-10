@@ -20,7 +20,7 @@ void CPU::execute(string outFile) {
     fout.open(outFile);
     while ( ! allInstructionDone()) {
         if (instructionFetchable())
-            instructionFetch();
+            instructionFetch(_programCounter);
 
         _programCounter++;
         _registers.plRegNew["IF/ID"]["PC"] = to_string(_programCounter*4);
@@ -75,10 +75,6 @@ bool CPU::allInstructionDone() {
 void CPU::instructionFetch(int pc) {
     Instruction* instruction = Instruction::instructionDecode(_memory.getInstruction(pc), &_memory, &_registers, &_programCounter);
     _pipeline.push_back(instruction);
-}
-
-void CPU::instructionFetch() {
-    instructionFetch(_programCounter);
 }
 
 void CPU::stallPipeline(int i) {
