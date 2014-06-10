@@ -7,7 +7,7 @@
 
 LwInstruction::LwInstruction(string machineCode)
 : ITypeInstruction(machineCode) {
-    _controlSginal = "000101011";
+    _controlSignal = "000101011";
 }
 
 void LwInstruction::WBStage() {

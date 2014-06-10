@@ -8,7 +8,7 @@
 
 BeqInstruction::BeqInstruction(string machineCode)
 : ITypeInstruction(machineCode) {
-    _controlSginal = "001010000";
+    _controlSignal = "001010000";
 }
 
 int BeqInstruction::ALUResult(int data1, int data2) {
@@ -30,7 +30,7 @@ void BeqInstruction::IDStage() {
             {"Rs", to_string(_rs)},
             {"Rt", to_string(_rt)},
             {"Rd", "0"},
-            {"Control Signals", _controlSginal}
+            {"Control Signals", _controlSignal}
     };
     if (needTakeBranch(getALUsrc("Rs"), getALUsrc("Rt")))
         *(_programCounter) = stoi(_regs->plReg["IF/ID"]["PC"])/4 + _immediate;

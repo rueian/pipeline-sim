@@ -7,7 +7,7 @@
 
 SwInstruction::SwInstruction(string machineCode)
 :ITypeInstruction(machineCode) {
-    _controlSginal = "000100100";
+    _controlSignal = "000100100";
 }
 
 int SwInstruction::ALUResult(int data1, int data2) {

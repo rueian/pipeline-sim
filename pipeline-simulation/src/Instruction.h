@@ -52,7 +52,7 @@ protected:
     Registers *_regs;
     string _currentStage;
     string _machineCode;
-    string _controlSginal;
+    string _controlSignal;
 
     virtual void IFStage();
     virtual void IDStage() = 0;
