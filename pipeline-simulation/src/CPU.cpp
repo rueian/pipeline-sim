@@ -59,7 +59,7 @@ void CPU::printStatus(ofstream& fout) {
             if (!(k.compare("EX/MEM") == 0 && v == "Rt" && _registers.plReg[k][v] == "") && !(k.compare("EX/MEM") == 0 && v == "Rd" && _registers.plReg[k][v] == ""))
                 fout << setw(17) << left << v << _registers.plReg[k][v] << endl;
         }
-        fout << endl;
+        if (k != "MEM/WB") fout << endl;
     }
     fout << "=================================================================" << endl;
 }
