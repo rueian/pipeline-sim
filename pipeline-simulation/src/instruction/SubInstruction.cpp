@@ -13,5 +13,5 @@ int SubInstruction::ALUResult(int data1, int data2) {
     return data1 - data2;
 }
 
-REGISTER_INSTRUCTION(000000100010, SubInstruction)
+//REGISTER_INSTRUCTION(000000100010, SubInstruction)
 

@@ -7,7 +7,8 @@
 #include "Instruction.h"
 
 typedef Instruction* (*Func)(string);
-map<string, Func> Instruction::_instructionMap __attribute__((init_priority(101)));
+//map<string, Func> Instruction::_instructionMap __attribute__((init_priority(101)));
+map<string, Func> Instruction::_instructionMap;
 
 void Instruction::goNextStage() {
     if (_currentStage == "BEGIN") {
