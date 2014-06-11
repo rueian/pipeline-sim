@@ -3,6 +3,7 @@
 // Copyright (c) 2014 ___FULLUSERNAME___. All rights reserved.
 //
 
+#include <iostream>
 #include "RTypeInstruction.h"
 
 RTypeInstruction::RTypeInstruction(string machineCode)
@@ -49,12 +50,17 @@ void RTypeInstruction::WBStage() {
 }
 
 int RTypeInstruction::getALUSrc(string src) {
-    if (hazardHappened("EX/MEM", src))
+    if (hazardHappened("EX/MEM", src)) {
+        cout << "Data Hazard" << endl;
         return stoi(_regs->plReg["EX/MEM"]["ALUout"]);
-    else if (lwHazardHappened(src))
+    } else if (lwHazardHappened(src)) {
+        cout << "Lw   Hazard" << endl;
         return stoi(_regs->plReg["MEM/WB"]["ReadData"]);
-    else if (hazardHappened("MEM/WB", src))
+    } else if (hazardHappened("MEM/WB", src)) {
+        cout << "Data Hazard" << endl;
         return stoi(_regs->plReg["MEM/WB"]["ALUout"]);
+    }
+
     string destination = (src == "Rs" ? "ReadData1" : "ReadData2");
     return stoi(_regs->plReg["ID/EX"][destination]);
 }

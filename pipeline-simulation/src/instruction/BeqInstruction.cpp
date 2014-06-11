@@ -66,10 +66,14 @@ bool BeqInstruction::hazardHappened(string reg, string src) {
 }
 
 int BeqInstruction::getALUsrc(string src) {
-    if (hazardHappened("EX/MEM", src))
+    if (hazardHappened("EX/MEM", src)) {
+        cout << "Branch Hazard" << endl;
         return stoi(_regs->plReg["EX/MEM"]["ALUout"]);
-    else if (hazardHappened("MEM/WB", src))
+    } else if (hazardHappened("MEM/WB", src)) {
+        cout << "Branch Hazard" << endl;
         return stoi(_regs->plReg["MEM/WB"]["ALUout"]);
+    }
+
     return  (int)(src == "Rs" ? _regs->reg[_rs] : _regs->reg[_rt]);
 }
 

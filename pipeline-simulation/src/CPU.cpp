@@ -4,6 +4,7 @@
 //
 
 #include <iomanip>
+#include <iostream>
 #include "CPU.h"
 
 using namespace std;
@@ -86,9 +87,11 @@ void CPU::stallPipeline(int i) {
     _registers.plRegNew["IF/ID"] = _registers.plReg["IF/ID"];
     _programCounter --;
     instructionFetch(_programCounter-1);
+    cout << "Stall Pipeline" << endl;
 }
 
 void CPU::flushInstruction(int instructionIndex) {
     if (instructionIndex+1 >= _pipeline.size()) return;
     _pipeline[instructionIndex+1]->becomeNop();
+    cout << "Flush Instruction" << endl;
 }
