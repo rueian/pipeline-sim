@@ -93,11 +93,11 @@ PC               8
 Instruction      00010000001000100000000000000010
 
 ID/EX:
-ReadData1        0
-ReadData2        0
+ReadData1        1
+ReadData2        2
 sign_ext         0
-Rs               0
-Rt               0
+Rs               1
+Rt               2
 Rd               0
 Control signals  000000000
 
@@ -142,7 +142,7 @@ Control signals  001010000
 EX/MEM:
 ALUout           0
 WriteData        0
-Rt               0
+Rt               2
 Control signals  00000
 
 MEM/WB:

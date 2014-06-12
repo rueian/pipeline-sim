@@ -37,11 +37,22 @@ void BeqInstruction::IDStage() {
 }
 
 void BeqInstruction::EXStage() {
-    Instruction::nopEXStage();
+    _regs->plRegNew["EX/MEM"] = {
+            {"ALUout", "0"},
+            {"WriteData", "0"},
+            {"Rt", "0"},
+            {"Rd", ""},
+            {"Control signals", "00000"}
+    };
 }
 
 void BeqInstruction::MEMStage() {
-    Instruction::nopMEMStage();
+    _regs->plRegNew["MEM/WB"] = {
+            {"ReadData", "0"},
+            {"ALUout", "0"},
+            {"Rd", "0"},
+            {"Control signals", "00"}
+    };
 }
 
 bool BeqInstruction::IDStallPipeline() {

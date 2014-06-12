@@ -77,6 +77,7 @@ void Instruction::IFStage() {
     _regs->plRegNew["IF/ID"]["Instruction"] = _machineCode;
     _regs->plRegNew["IF/ID"]["Rs"] = to_string(_rs);
     _regs->plRegNew["IF/ID"]["Rt"] = to_string(_rt);
+    _regs->plRegNew["IF/ID"]["Rd"] = to_string(_rd);
 }
 
 Instruction::Instruction(string machineCode) {
@@ -104,16 +105,17 @@ void Instruction::nopIFStage() {
     _regs->plRegNew["IF/ID"]["Instruction"] = "00000000000000000000000000000000";
     _regs->plRegNew["IF/ID"]["Rs"] = "0";
     _regs->plRegNew["IF/ID"]["Rt"] = "0";
+    _regs->plRegNew["IF/ID"]["Rd"] = "0";
 }
 
 void Instruction::nopIDStage() {
     _regs->plRegNew["ID/EX"] = {
-            {"ReadData1", "0"},
-            {"ReadData2", "0"},
+            {"ReadData1", to_string((int)_regs->reg[stoi(_regs->plReg["IF/ID"]["Rs"])])},
+            {"ReadData2", to_string((int)_regs->reg[stoi(_regs->plReg["IF/ID"]["Rt"])])},
             {"sign_ext", "0"},
-            {"Rs", "0"},
-            {"Rt", "0"},
-            {"Rd", "0"},
+            {"Rs", _regs->plReg["IF/ID"]["Rs"]},
+            {"Rt", _regs->plReg["IF/ID"]["Rt"]},
+            {"Rd", _regs->plReg["IF/ID"]["Rd"]},
             {"Control signals", "000000000"}
     };
 }
@@ -122,7 +124,7 @@ void Instruction::nopEXStage() {
     _regs->plRegNew["EX/MEM"] = {
             {"ALUout", "0"},
             {"WriteData", "0"},
-            {"Rt", "0"},
+            {"Rt", _regs->plReg["ID/EX"]["Rt"]},
             {"Rd", ""},
             {"Control signals", "00000"}
     };
@@ -131,8 +133,8 @@ void Instruction::nopEXStage() {
 void Instruction::nopMEMStage() {
     _regs->plRegNew["MEM/WB"] = {
             {"ReadData", "0"},
-            {"ALUout", "0"},
-            {"Rd", "0"},
+            {"ALUout", _regs->plReg["EX/MEM"]["ALUout"]},
+            {"Rd", _regs->plReg["EX/MEM"]["Rd"]},
             {"Control signals", "00"}
     };
 }
