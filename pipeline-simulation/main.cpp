@@ -11,6 +11,7 @@
         return (Instruction*)new class(machineCode); \
     });
 
+#include <iostream>
 #include "CPU.h"
 #include "AddInstruction.h"
 #include "AndInstruction.h"
@@ -42,6 +43,7 @@ int main(int argc, const char * argv[])
             {"Branchbonus.txt", "bonusResult.txt"},
     };
     for(auto& file : IO) {
+        cout << file.first << ":" << endl;
         Memory ram({{"0", 1}, {"4", 2}, {"8", 3}, {"12", 4}, {"16", 5}});
         Registers registers({0, 1, 2, 3, 4, 1, 6, 7, 8});
         CPU cpu(registers, ram);
