@@ -95,7 +95,7 @@ Instruction      00010000001000100000000000000010
 ID/EX:
 ReadData1        1
 ReadData2        2
-sign_ext         0
+sign_ext         2
 Rs               1
 Rt               2
 Rd               0

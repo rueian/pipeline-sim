@@ -78,6 +78,7 @@ void Instruction::IFStage() {
     _regs->plRegNew["IF/ID"]["Rs"] = to_string(_rs);
     _regs->plRegNew["IF/ID"]["Rt"] = to_string(_rt);
     _regs->plRegNew["IF/ID"]["Rd"] = to_string(_rd);
+    _regs->plRegNew["IF/ID"]["sign_ext"] = "0";
 }
 
 Instruction::Instruction(string machineCode) {
@@ -106,13 +107,14 @@ void Instruction::nopIFStage() {
     _regs->plRegNew["IF/ID"]["Rs"] = "0";
     _regs->plRegNew["IF/ID"]["Rt"] = "0";
     _regs->plRegNew["IF/ID"]["Rd"] = "0";
+    _regs->plRegNew["IF/ID"]["sign_ext"] = "0";
 }
 
 void Instruction::nopIDStage() {
     _regs->plRegNew["ID/EX"] = {
             {"ReadData1", to_string((int)_regs->reg[stoi(_regs->plReg["IF/ID"]["Rs"])])},
             {"ReadData2", to_string((int)_regs->reg[stoi(_regs->plReg["IF/ID"]["Rt"])])},
-            {"sign_ext", "0"},
+            {"sign_ext", _regs->plReg["IF/ID"]["sign_ext"]},
             {"Rs", _regs->plReg["IF/ID"]["Rs"]},
             {"Rt", _regs->plReg["IF/ID"]["Rt"]},
             {"Rd", _regs->plReg["IF/ID"]["Rd"]},

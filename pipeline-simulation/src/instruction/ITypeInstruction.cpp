@@ -13,6 +13,11 @@ ITypeInstruction::~ITypeInstruction() {
 
 }
 
+void ITypeInstruction::IFStage() {
+    Instruction::IFStage();
+    _regs->plRegNew["IF/ID"]["sign_ext"] = to_string(_immediate);
+}
+
 void ITypeInstruction::IDStage() {
     _regs->plRegNew["ID/EX"] = {
             {"ReadData1", to_string((int)_regs->reg[_rs])},
