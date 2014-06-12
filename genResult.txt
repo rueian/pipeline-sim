@@ -128,7 +128,7 @@ Data Memory:
 
 IF/ID:
 PC               16
-Instruction      00000000101001000001100000100100
+Instruction      00000000000000000000000000000000
 
 ID/EX:
 ReadData1        1
